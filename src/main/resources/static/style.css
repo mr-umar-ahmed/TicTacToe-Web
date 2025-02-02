@@ -1,50 +1,65 @@
+/* General Body Styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     text-align: center;
-    background-color: #f4f4f4;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
     margin: 0;
     padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+/* Container Styling */
 .container {
-    max-width: 400px;
-    margin: 50px auto;
+    max-width: 450px;
+    margin: 0 auto;
     padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
 }
 
+.container:hover {
+    transform: scale(1.02); /* Slight zoom effect on hover */
+}
+
+/* Title Styling */
 h1 {
-    color: #333;
+    color: #333333;
+    font-size: 2rem;
     margin-bottom: 20px;
+    letter-spacing: 1px;
 }
 
+/* Game Board Styling */
 #game-board {
     display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-gap: 10px;
-    justify-content: center;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
     margin-bottom: 20px;
 }
 
 .cell {
     width: 100px;
     height: 100px;
-    background-color: #e0e0e0;
+    background-color: #eef2f7;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
+    border-radius: 8px;
     cursor: pointer;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .cell:hover {
-    background-color: #d0d0d0;
+    background-color: #dce7f3;
+    transform: scale(1.05); /* Slight zoom effect on hover */
 }
 
 .cell.X {
@@ -54,23 +69,48 @@ h1 {
 .cell.O {
     color: #3498db; /* Blue for O */
 }
+
+/* Message Styling */
 #message {
     margin-top: 20px;
     font-size: 1.5rem;
     font-weight: bold;
-    color: #333;
+    color: #333333;
+    letter-spacing: 1px;
 }
+
+/* Reset Button Styling */
 #reset-button {
     padding: 10px 20px;
     font-size: 1rem;
-    color: #fff;
+    color: #ffffff;
     background-color: #2ecc71;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 #reset-button:hover {
     background-color: #27ae60;
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .cell {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+
+    #reset-button {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
 }
