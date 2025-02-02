@@ -1,9 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const board = document.getElementById("game-board");
-    const message = document.createElement("div");
-    message.id = "message";
-    document.querySelector(".container").appendChild(message);
-
+    const message = document.getElementById("message");
     let currentPlayer = "X"; // Start with "X"
     const gameState = {};
 
