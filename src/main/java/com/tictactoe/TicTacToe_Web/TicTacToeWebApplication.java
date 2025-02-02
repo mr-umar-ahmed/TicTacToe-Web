@@ -1,4 +1,4 @@
-package com.tictactoe.TicTacToe_Web;
+package com.tictactoe;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -32,5 +32,12 @@ public class TicTacToeWebApplication {
 		}
 		gameState.put(position, player);
 		return "Move successful!";
+	}
+
+	// POST endpoint to reset the game
+	@PostMapping("/api/reset-game")
+	public String resetGame() {
+		gameState.clear();
+		return "Game reset!";
 	}
 }
