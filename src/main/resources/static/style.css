@@ -54,7 +54,12 @@ h1 {
 .cell.O {
     color: #3498db; /* Blue for O */
 }
-
+#message {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
 #reset-button {
     padding: 10px 20px;
     font-size: 1rem;

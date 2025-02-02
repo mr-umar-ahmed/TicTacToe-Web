@@ -31,6 +31,18 @@ public class TicTacToeWebApplication {
 			return "Position already taken!";
 		}
 		gameState.put(position, player);
+
+		// Check for a winner
+		String winner = checkForWinner();
+		if (winner != null) {
+			return "Winner: " + winner;
+		}
+
+		// Check for a draw
+		if (gameState.size() == 9) {
+			return "Draw!";
+		}
+
 		return "Move successful!";
 	}
 
@@ -39,5 +51,30 @@ public class TicTacToeWebApplication {
 	public String resetGame() {
 		gameState.clear();
 		return "Game reset!";
+	}
+
+	// Helper method to check for a winner
+	private String checkForWinner() {
+		int[][] winningCombinations = {
+				{0, 1, 2}, // Row 1
+				{3, 4, 5}, // Row 2
+				{6, 7, 8}, // Row 3
+				{0, 3, 6}, // Column 1
+				{1, 4, 7}, // Column 2
+				{2, 5, 8}, // Column 3
+				{0, 4, 8}, // Diagonal 1
+				{2, 4, 6}  // Diagonal 2
+		};
+
+		for (int[] combination : winningCombinations) {
+			String player = gameState.get(combination[0]);
+			if (player != null &&
+					player.equals(gameState.get(combination[1])) &&
+					player.equals(gameState.get(combination[2]))) {
+				return player; // Return the winning player ("X" or "O")
+			}
+		}
+
+		return null; // No winner yet
 	}
 }

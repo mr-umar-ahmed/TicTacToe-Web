@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     const board = document.getElementById("game-board");
+    const message = document.createElement("div");
+    message.id = "message";
+    document.querySelector(".container").appendChild(message);
+
     let currentPlayer = "X"; // Start with "X"
     const gameState = {};
 
@@ -25,13 +29,20 @@ document.addEventListener("DOMContentLoaded", () => {
         // Make a move via the backend API
         fetch(`/api/make-move?position=${position}&player=${currentPlayer}`, { method: "POST" })
             .then(response => response.text())
-            .then(message => {
-                if (message === "Move successful!") {
+            .then(result => {
+                if (result === "Move successful!") {
                     cell.textContent = currentPlayer;
                     cell.classList.add(currentPlayer); // Add class for styling
                     currentPlayer = currentPlayer === "X" ? "O" : "X"; // Switch player
+                } else if (result.startsWith("Winner:")) {
+                    const winner = result.split(": ")[1];
+                    displayMessage(`Player ${winner} Wins!`);
+                    disableBoard();
+                } else if (result === "Draw!") {
+                    displayMessage("It's a Draw!");
+                    disableBoard();
                 } else {
-                    alert(message); // Show error message (e.g., "Position already taken!")
+                    alert(result); // Show error message (e.g., "Position already taken!")
                 }
             });
     }
@@ -67,6 +78,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Reset the current player to "X"
                 currentPlayer = "X";
+
+                // Clear the message
+                message.textContent = "";
+                enableBoard();
             });
     });
+
+    // Display a message (e.g., "Player X Wins!" or "It's a Draw!")
+    function displayMessage(text) {
+        message.textContent = text;
+    }
+
+    // Disable the board (prevent further moves)
+    function disableBoard() {
+        for (const cell of board.children) {
+            cell.style.pointerEvents = "none"; // Disable clicks
+        }
+    }
+
+    // Enable the board (allow moves again)
+    function enableBoard() {
+        for (const cell of board.children) {
+            cell.style.pointerEvents = "auto"; // Enable clicks
+        }
+    }
 });
