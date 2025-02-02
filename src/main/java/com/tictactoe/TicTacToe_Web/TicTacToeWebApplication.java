@@ -1,4 +1,4 @@
-package com.tictactoe;
+package com.tictactoe.TicTacToe_Web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -35,7 +35,7 @@ public class TicTacToeWebApplication {
 		// Check for a winner
 		String winner = checkForWinner();
 		if (winner != null) {
-			return "Winner: " + winner;
+			return "Winner: " + winner; // Return the winning player ("X" or "O")
 		}
 
 		// Check for a draw
